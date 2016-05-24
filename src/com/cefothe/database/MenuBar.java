@@ -34,6 +34,13 @@ public class MenuBar extends JMenuBar {
         databaseBrowser.addActionListener(main);
 
         /**
+         * SQL
+         */
+        JMenuItem sqlExecute = new JMenuItem("Execute SQL");
+        menu.add(sqlExecute);
+        sqlExecute.addActionListener(main);
+
+        /**
          * Exit command
          */
         JMenuItem exit = new JMenuItem("Exit");

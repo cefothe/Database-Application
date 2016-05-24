@@ -14,12 +14,14 @@ public class Main extends JFrame implements ActionListener {
 
     private Connection connection;
 
+    private JPanel previusActivePanel;
+
     public static void main(String[] args) {
         Main main = new Main();
     }
 
     public Main(){
-        ConnectionDialog dialog = new ConnectionDialog(this);
+       ConnectionDialog dialog = new ConnectionDialog(this);
         connection = dialog.getConnection();
         MenuBar menuBar = new MenuBar(this);
         setJMenuBar(menuBar);
@@ -33,10 +35,19 @@ public class Main extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Database browser")){
             DatabaseBrowser databaseBrowser = new DatabaseBrowser(connection);
-            add(databaseBrowser,BorderLayout.CENTER);
-            revalidate();
+            changeActiveModel(databaseBrowser);
+        }if (e.getActionCommand().equals("Execute SQL")){
+            ExecuteSQL executeSQL = new ExecuteSQL();
+            changeActiveModel(executeSQL);
         }
+    }
 
-
+    private void changeActiveModel(JPanel current){
+        if(previusActivePanel!=null){
+            remove(previusActivePanel);
+        }
+        add(current,BorderLayout.CENTER);
+        previusActivePanel = current;
+        revalidate();
     }
 }
