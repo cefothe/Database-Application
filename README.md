@@ -11,6 +11,7 @@ We choise to use those  technologies.
 * Java 1.8
 * Swing
 * JDBS connector(Oracle 11g)
+
 ## Authors
 * Stefan Angelov
 * Aleksander Garov
