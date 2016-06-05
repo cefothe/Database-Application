@@ -5,6 +5,8 @@ import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 
 /**
@@ -26,8 +28,16 @@ public class Main extends JFrame implements ActionListener {
         MenuBar menuBar = new MenuBar(this);
         setJMenuBar(menuBar);
         setLayout(new BorderLayout());
-        setSize(600, 450);
+        setSize(500, 600);
         setVisible(true);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent event) {
+                setVisible(false);
+                removeWindowListener(this);
+                dispose();
+                System.exit(0);
+            }
+        });
 
     }
 
@@ -37,7 +47,7 @@ public class Main extends JFrame implements ActionListener {
             DatabaseBrowser databaseBrowser = new DatabaseBrowser(connection);
             changeActiveModel(databaseBrowser);
         }if (e.getActionCommand().equals("Execute SQL")){
-            ExecuteSQL executeSQL = new ExecuteSQL();
+            ExecuteSQL executeSQL = new ExecuteSQL(connection                                                                                                                                                                                                                                                                                                                                       );
             changeActiveModel(executeSQL);
         }
     }
