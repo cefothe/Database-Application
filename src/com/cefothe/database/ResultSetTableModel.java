@@ -14,6 +14,11 @@ import java.util.List;
     private List columnHeaders;
     private List tableData;
 
+    /**
+     * This is contain information for table that we represent in all tables
+     * @param resultSet {@link ResultSet}
+     * @throws SQLException If result set is empty
+     */
     public ResultSetTableModel(ResultSet resultSet)
             throws SQLException {
         List rowData;
@@ -33,23 +38,48 @@ import java.util.List;
         }
     }
 
+    /**
+     * This method return a number of columns
+     * @return number of columns
+     */
     public int getColumnCount() {
         return columnHeaders.size();
     }
 
+    /**
+     *This method return a number of rows
+     * @return number of rows
+     */
     public int getRowCount() {
         return tableData.size();
     }
 
+    /**
+     * This method return a values for cell
+     * @param row Where is the row
+     * @param column Where is the column
+     * @return return a value for cell
+     */
     public Object getValueAt(int row, int column) {
         List rowData = (List)(tableData.get(row));
         return rowData.get(column);
     }
 
+    /**
+     * This method return is cell is editable
+     * @param row Where is the row
+     * @param column Where is the column
+     * @return if cell is editable
+     */
     public boolean isCellEditable(int row, int column) {
         return false;
     }
 
+    /**
+     * This method  return header name
+     * @param column which is a column
+     * @return return a current name of header row
+     */
     public String getColumnName(int column) {
         return (String)(columnHeaders.get(column));
     }
