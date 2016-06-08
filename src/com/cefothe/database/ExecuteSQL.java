@@ -28,11 +28,18 @@ public class ExecuteSQL extends JPanel {
     private JTable table;
     private Connection connection;
 
+    /**
+     * This is main constructor
+     * @param connection {@link Connection}
+     */
     public  ExecuteSQL(Connection connection){
         this.connection= connection;
         buildFrameLayout();
     }
 
+    /**
+     * Build frame layout for execute sql screen
+     */
     private void buildFrameLayout() {
         table = new JTable();
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -41,6 +48,9 @@ public class ExecuteSQL extends JPanel {
         add(new JScrollPane(table));
     }
 
+    /**
+     * Create submit button to execute sql
+     */
     private void createButtons() {
         JButton submitButton = new JButton("Execute SQL");
         jButton = submitButton;
@@ -54,6 +64,10 @@ public class ExecuteSQL extends JPanel {
 
     }
 
+    /**
+     * Validate sql with {@link TGSqlParser}
+     * @param sqlQuery sql query
+     */
     private void validateSql(String sqlQuery){
         TGSqlParser sqlparser= new TGSqlParser(EDbVendor.dbvoracle);
         sqlparser.setSqltext(sqlQuery);
@@ -65,6 +79,11 @@ public class ExecuteSQL extends JPanel {
         }
     }
 
+    /**
+     * This method execute sql query related to their type.
+     * @param stmt {@link TCustomSqlStatement} That is contain type of query
+     * @param sqlQuery last insert sql query
+     */
     protected void executeQuery(TCustomSqlStatement stmt, String sqlQuery){
         switch(stmt.sqlstatementtype){
             case sstselect:
@@ -75,6 +94,10 @@ public class ExecuteSQL extends JPanel {
         }
     }
 
+    /**
+     * Execute all queries without SELECT
+     * @param sqlQuery
+     */
     private void executeAnotherQuery(String sqlQuery){
         try {
             Statement stmt = connection.createStatement();
@@ -86,6 +109,10 @@ public class ExecuteSQL extends JPanel {
         };
     }
 
+    /**
+     * Refresh table contain when we have SELECT query
+     * @param sqlQuery sql query
+     */
     private void refreshTable(String sqlQuery) {
         try {
             Statement stmt = connection.createStatement();
@@ -97,6 +124,10 @@ public class ExecuteSQL extends JPanel {
         };
     }
 
+
+    /**
+     * Create text area put sql query
+     */
     private void createTextPane() {
         JTextPane textPane =  new JTextPane();
         JScrollPane paneScrollPane = new JScrollPane(textPane);

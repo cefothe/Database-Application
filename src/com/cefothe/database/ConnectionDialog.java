@@ -18,17 +18,28 @@ public class ConnectionDialog extends JDialog {
     private boolean canceled;
     private Connection connect;
 
+    /**
+     * This method show first dialog to connect to databse
+     * @param frame This is main frame {@link JFrame}
+     */
     public ConnectionDialog(JFrame frame){
         super(frame, "Connect to database", true);
         buildDialogLayout();
         setSize(300, 200);
     }
 
+    /**
+     * This method return database connection
+     * @return {@link Connection}
+     */
     public Connection getConnection() {
         setVisible(true);
         return connect;
     }
 
+    /**
+     * Build dialog to insert username, password and url
+     */
     private void buildDialogLayout() {
         JLabel label;
         Container pane = getContentPane();
@@ -71,6 +82,10 @@ public class ConnectionDialog extends JDialog {
         pane.add(getButtonPanel(), constraints);
     }
 
+    /**
+     * This method generate buttons (OK button to start connection, Cancel button to stop connection)
+     * @return {@link JPanel}
+     */
     private JPanel getButtonPanel() {
         JPanel panel = new JPanel();
         JButton btn = new JButton("Ok");
@@ -100,6 +115,10 @@ public class ConnectionDialog extends JDialog {
         System.exit(0);
     }
 
+    /**
+     * Try to connect to database with {@link DriverManager}
+     * @return true if connection is success
+     */
     private boolean attemptConnection() {
         try {
             connect = DriverManager.getConnection(

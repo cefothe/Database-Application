@@ -18,10 +18,17 @@ public class Main extends JFrame implements ActionListener {
 
     private JPanel previusActivePanel;
 
+    /**
+     * Entry point of application
+     * @param args options parameters
+     */
     public static void main(String[] args) {
         Main main = new Main();
     }
 
+    /**
+     * Build application
+     */
     public Main(){
        ConnectionDialog dialog = new ConnectionDialog(this);
         connection = dialog.getConnection();
@@ -41,6 +48,10 @@ public class Main extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Catch all action event
+     * @param e current {@link ActiveEvent}
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Database browser")){
@@ -52,6 +63,10 @@ public class Main extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     *  Change active model in main frame
+     * @param current current active {@link JPanel}
+     */
     private void changeActiveModel(JPanel current){
         if(previusActivePanel!=null){
             remove(previusActivePanel);

@@ -25,11 +25,18 @@ public class DatabaseBrowser extends  JPanel  {
     private JComboBox tableBox;
     private JTable table;
 
+    /**
+     * This constructor is main constructor for {@link DatabaseBrowser}
+     * @param connection Database connections {@link Connection}
+     */
     public  DatabaseBrowser(Connection connection){
         this.connection = connection;
         buildFrameLayout();
     }
 
+    /**
+     * Build frame layout for Database browser
+     */
     private void buildFrameLayout() {
        add(getSelectionPanel(), BorderLayout.NORTH);
         table = new JTable();
@@ -38,6 +45,10 @@ public class DatabaseBrowser extends  JPanel  {
        add(new JScrollPane(table), BorderLayout.CENTER);
     }
 
+    /**
+     *  This method generated top menu ot Database Browser
+     * @return {@link JPanel}
+     */
     private JPanel getSelectionPanel() {
         JLabel label;
         JPanel panel = new JPanel();
@@ -92,6 +103,10 @@ public class DatabaseBrowser extends  JPanel  {
 
 
     }
+
+    /**
+     * This method change and generate values in catalog box
+     */
     private void populateCatalogBox() {
         try {
             DatabaseMetaData metaData = connection.getMetaData();
@@ -108,6 +123,9 @@ public class DatabaseBrowser extends  JPanel  {
             catalogBox.setEnabled(false);
         }
     }
+    /**
+     * This method change and generate values in schema box
+     */
     private void populateSchemaBox() {
         try {
             DatabaseMetaData metaData = connection.getMetaData();
@@ -123,7 +141,9 @@ public class DatabaseBrowser extends  JPanel  {
             schemaBox.setEnabled(false);
         }
     }
-
+    /**
+     * This method change and generate values in table box
+     */
     private void populateTableBox() {
         try {
             String[] types = {"TABLE"};
@@ -145,7 +165,9 @@ public class DatabaseBrowser extends  JPanel  {
     }
 
 
-
+    /**
+     * This method refresh table contains
+     */
     private void refreshTable() {
         String catalog = (catalogBox.isEnabled() ?
                 catalogBox.getSelectedItem().toString() :

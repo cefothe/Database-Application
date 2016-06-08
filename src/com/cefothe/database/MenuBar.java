@@ -15,6 +15,10 @@ public class MenuBar extends JMenuBar {
 
     }
 
+    /**
+     * Build menu
+     * @param main {@link Main}
+     */
     private void buildInformationMenu(Main main) {
         JMenu menu = new JMenu("Main");
         add(menu);
